@@ -1,4 +1,11 @@
 import requests
+from enum import Enum
+
+class CustomStatus(Enum):
+    ONLINE = "online"
+    IDLE = "idle"
+    DND = "dnd"
+    INVISIBLE = "invisible"
 
 def send_payload(discord_token: str, payload: dict) -> dict:
     response = requests.patch(
@@ -14,14 +21,14 @@ def send_payload(discord_token: str, payload: dict) -> dict:
 
 def set_custom_status(
         discord_token: str,
-        custom_status: str,
+        message: str,
         emoji: str,
-        status: str = "online" # TODO Should be enum (online/idle/dnd/invisible)
+        status: CustomStatus = CustomStatus.ONLINE
         ) -> dict:
     return send_payload(discord_token, {
         "custom_status": {
-            "text": custom_status,
+            "text": message,
             "emoji_name": emoji,
         },
-        "status": status
+        "status": status.value
     })
