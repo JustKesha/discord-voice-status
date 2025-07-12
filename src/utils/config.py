@@ -37,6 +37,7 @@ def merge_envs_to_config(
         remove_prefix: bool = Default.ENVS_REMOVE_PREFIX
         ) -> Dict[str, Any]:
     env_config = {
+        # TODO Add option to lowercase env names for config
         (k[len(prefix):] if remove_prefix else k): v
         for k, v in envs.items() if k.startswith(prefix)
         }
@@ -52,9 +53,15 @@ def load_config(
         root_path: str = Default.ROOT, # NOTE Using same path for yaml & envs
         **kwargs
         ) -> Dict[str, Any]:
+    global config
     config = merge_envs_to_config(
         config = load_yaml(yaml_file, root_path),
         envs = load_envs(envs_file, root_path),
         **kwargs
         )
     return config
+
+def get_config() -> Dict[str, Any]: return config
+
+if __name__ == "__main__":
+    load_config()
