@@ -1,8 +1,10 @@
 import os
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, Union
 import yaml
 from dotenv import load_dotenv
+
+config: Union[Dict[str, Any], None] = None
 
 class Default:
     ROOT = Path(__file__).parent.parent.parent
@@ -50,8 +52,9 @@ def load_config(
         root_path: str = Default.ROOT, # NOTE Using same path for yaml & envs
         **kwargs
         ) -> Dict[str, Any]:
-    return merge_envs_to_config(
+    config = merge_envs_to_config(
         config = load_yaml(yaml_file, root_path),
         envs = load_envs(envs_file, root_path),
         **kwargs
         )
+    return config
