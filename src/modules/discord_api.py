@@ -1,6 +1,7 @@
+import time
 import requests
 from enum import Enum
-from utils import config
+from utils import get_config
 
 class CustomStatus(Enum):
     ONLINE = "online"
@@ -10,14 +11,38 @@ class CustomStatus(Enum):
 
 class Default:
     STATUS = CustomStatus.ONLINE
+    EMOJI = ""
 
-def send_payload(discord_token: str, payload: dict) -> dict:
+_last_api_call_time = 0
+_payload_rate_limit = 0 # Max 1 call per <- seconds
+
+def can_send_payload() -> bool:
+    global _last_api_call_time, _payload_rate_limit
+    config = get_config()
     api = config["api"]
-    discord_api_url = api["discord_url"] + api["discord_settings"]
+    # NOTE Should probably not update it each time, better have an init method
+    _payload_rate_limit = api["limits"]["presence_update_rate_limit"]
+
+    current_time = time.time()
+    time_since_last_call = current_time - _last_api_call_time
+
+    if time_since_last_call < _payload_rate_limit:
+        return False
+    
+    _last_api_call_time = current_time
+    return True
+
+def send_payload(payload: dict) -> dict:
+    if not can_send_payload():
+        return {}
+
+    config = get_config()
+    api = config["api"]
+    discord_api_url = api["url"]["base"] + api["url"]["settings"]
     response = requests.patch(
         discord_api_url,
         headers = {
-            "Authorization": discord_token,
+            "Authorization": config["env"]["DISCORD_TOKEN"],
             "User-Agent": api["user_agent"],
             "Content-Type": "application/json",
             "Accept": "application/json"
@@ -27,12 +52,14 @@ def send_payload(discord_token: str, payload: dict) -> dict:
     return response.json()
 
 def set_custom_status(
-        discord_token: str,
         message: str,
-        emoji: str,
+        emoji: str = Default.EMOJI,
         status: CustomStatus = Default.STATUS
         ) -> dict:
-    return send_payload(discord_token, {
+    config = get_config()
+    limits = config["api"]["limits"]
+    message = message[:limits["max_status_length"]]
+    return send_payload({
         "custom_status": {
             "text": message,
             "emoji_name": emoji,
