@@ -58,7 +58,7 @@ def set_custom_status(
         ) -> dict:
     config = get_config()
     limits = config["api"]["limits"]
-    message = message[:limits["max_status_length"]]
+    message = message[:limits["max_custom_status_length"]]
     return send_payload({
         "custom_status": {
             "text": message,
