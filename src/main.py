@@ -43,7 +43,11 @@ def loop(config: dict) -> int:
     print(f"Result: \"{text}\"")
     
     print("Requesting Discord API...")
-    response = modules.set_custom_status(text)
+    try:
+        response = modules.set_custom_status(text)
+    except Exception as error:
+        print(f"Something went wrong: \"{error}\"")
+        return -1
     print(f"Discord responded with: {json.dumps(response, indent=2)}")
 
     return 1
