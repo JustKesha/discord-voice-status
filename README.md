@@ -22,14 +22,14 @@ While this uses the same technology as clients like Vencord or BetterDiscord whi
 
 ## Installation
 
-1. Clone this repository:
-`git clone https://github.com/yourusername/discord-voice-status.git`
+1. Clone this repository:<br>
+`git clone https://github.com/JustKesha/discord-voice-status.git`<br>
 `cd discord-voice-status`
 
-2. Install the required dependencies:
+4. Install the required dependencies:<br>
 `pip install -r requirements.txt`
 
-3. Set up your configuration (see [Configuration section](#configuration) below)
+6. Set up your configuration (see [Configuration section](#configuration) below)
 
 ## Configuration
 
