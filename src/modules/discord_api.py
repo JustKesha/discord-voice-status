@@ -20,7 +20,8 @@ def can_send_payload() -> bool:
     global _last_api_call_time, _payload_rate_limit
     config = get_config()
     api = config["api"]
-    # NOTE Should probably not update it each time, better have an init method
+    # TODO Add init() method to update _payload_rate_limit
+    # instead of having it update each payload send
     _payload_rate_limit = api["limits"]["presence_update_rate_limit"]
 
     current_time = time.time()
