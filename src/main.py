@@ -24,31 +24,32 @@ def main() -> int:
 def loop(config: dict) -> int:
     status: dict = config["status"]
 
-    print("Recording...")
-    try:
-        audio = modules.record_audio(
-            duration_sec = status["update_interval"]
-        )
-    except Exception as error:
-        print(f"Something went wrong: \"{error}\"")
-    # TODO Should instead always record in the background
-    print("Finished audio recording")
+    while True:
+        print("Recording...")
+        try:
+            audio = modules.record_audio(
+                duration_sec = status["update_interval"]
+            )
+        except Exception as error:
+            print(f"Something went wrong: \"{error}\"")
+        # TODO Should instead always record in the background
+        print("Finished audio recording")
 
-    print("Running speech recognision...")
-    try:
-        text = modules.sound_to_text(audio)
-    except Exception as error:
-        print(f"Something went wrong: \"{error}\"")
-        return -1
-    print(f"Result: \"{text}\"")
-    
-    print("Requesting Discord API...")
-    try:
-        response = modules.set_custom_status(text)
-    except Exception as error:
-        print(f"Something went wrong: \"{error}\"")
-        return -1
-    print(f"Discord responded with: {json.dumps(response, indent=2)}")
+        print("Running speech recognision...")
+        try:
+            text = modules.sound_to_text(audio)
+        except Exception as error:
+            print(f"Something went wrong: \"{error}\"")
+            return -1
+        print(f"Result: \"{text}\"")
+        
+        print("Requesting Discord API...")
+        try:
+            response = modules.set_custom_status(text)
+        except Exception as error:
+            print(f"Something went wrong: \"{error}\"")
+            return -1
+        print(f"Discord responded with: {json.dumps(response, indent=2)}")
 
     return 1
 
