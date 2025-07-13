@@ -49,7 +49,11 @@ def loop(config: dict) -> int:
         except Exception as error:
             print(f"Something went wrong: \"{error}\"")
             return -1
-        print(f"Discord responded with: {json.dumps(response, indent=2)}")
+        if "code" in response:
+            print(F"Discord responded with: {json.dumps(response, indent=2)}")
+            return -1
+        response_custom_status = response["custom_status"]
+        print(f"Updated your Discord status to: {json.dumps(response_custom_status, indent=2)}")
 
     return 1
 
