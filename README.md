@@ -54,7 +54,7 @@ env:
 
 Create a .env file in the root directory with your token:
 ```env
-PY_TDS_DISCORD_TOKEN=your_token_here
+PY_DVS_DISCORD_TOKEN=your_token_here
 ```
 
 ### Getting Your Discord Token
