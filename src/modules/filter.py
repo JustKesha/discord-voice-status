@@ -12,7 +12,6 @@ def filter(text):
         print("Made list of banned words")
     print("Preparing filter...")
     text = text.replace("’", "'").lower()
-    text = text.lower
     print("Filter prepared")
     print("Filtering...")
     if any(word in text for word in banned_words):
