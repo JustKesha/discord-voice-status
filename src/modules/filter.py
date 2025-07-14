@@ -1,22 +1,23 @@
 import os
+from filter_modules import clean_text, mask_word
 
 def filter(text):
-    print("Filter module started")
-    print("Locating wordlist...")
     base_dir = os.path.dirname(__file__)
     wordlist_path = os.path.join(base_dir, 'wordlists_slur', 'wordlist_en.txt')
-    print("Wordlist found")
-    print("Making list of banned words..")
+
     with open(wordlist_path, 'r', encoding='utf-8') as f:
         banned_words = [line.strip().lower() for line in f if line.strip()]
-        print("Made list of banned words")
-    print("Preparing filter...")
-    text = text.replace("’", "'").lower()
-    print("Filter prepared")
-    print("Filtering...")
-    if any(word in text for word in banned_words):
-        print("Possible violation detected!")
-        return False
-    else
-        print("Text passed succesfully!")
-        return True  
+
+    text_clean = clean_text(text)
+    lowered = text_clean.lower()
+
+    masked_text = text_clean
+
+    for word in banned_words:
+        if word in lowered:
+            censored = mask_word(word)
+            masked_text = masked_text.replace(word, censored)
+            masked_text = masked_text.replace(word.capitalize(), censored)
+            masked_text = masked_text.replace(word.upper(), censored)
+
+    return masked_text
