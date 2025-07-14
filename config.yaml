@@ -1,6 +1,7 @@
 # Discord Custom Status
 status:
   update_interval: 10.0 # Seconds (Do not set below 4 seconds, 10-30 recommended)
+  language: "en-US"
 
 # Environment Variables
 # (If not specified here, will try to load from a .env file in the same directory)
@@ -16,3 +17,9 @@ api:
   limits:
     max_custom_status_length: 128
     presence_update_rate_limit: 4 # Max 1 update per <- seconds
+
+config:
+  env_prefix: "PY_TDS_" # Prefix for environment variables
+  env_section: "env" # Section name for environment variables in config
+  remove_env_prefix: true # Whether to remove prefix when loading env vars
+  language_config_path: ["status", "language"] # Path to language setting in config
