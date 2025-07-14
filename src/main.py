@@ -9,6 +9,8 @@ def main() -> int:
     try:
         config = utils.load_config()
         status = config["status"]
+        language = config.get("env", {}).get("LANGUAGE", "en")
+        print(f"Language from config: {language}")
     except FileNotFoundError:
         print(f"Couldnt find the \"{utils.config.Default.YAML}\" file at \"{utils.config.Default.ROOT}\"")
         return -1
@@ -33,8 +35,7 @@ def loop(config: dict) -> int:
         except Exception as error:
             print(f"Something went wrong: \"{error}\"")
         # TODO Should instead always record in the background
-        print("Finished audio recording")
-
+        print("Finished audio recording") 
         print("Running speech recognision...")
         try:
             text = modules.sound_to_text(audio)
@@ -45,7 +46,7 @@ def loop(config: dict) -> int:
         
         print("Running filter...")
         try:
-            text = filter(text)
+            text = filter(text, language)
         except Exception as error:  
             print(f"Something went wrong: \"{error}\"")
             return -1
