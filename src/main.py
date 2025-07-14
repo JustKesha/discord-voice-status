@@ -25,6 +25,7 @@ def main() -> int:
 
 def loop(config: dict) -> int:
     status: dict = config["status"]
+    language: dict = config["env"]["LANGUAGE"]
 
     while True:
         print("Recording...")
@@ -46,11 +47,11 @@ def loop(config: dict) -> int:
         
         print("Running filter...")
         try:
-            text = filter(text, language)
+            text = modules.filter(text, language)
         except Exception as error:  
             print(f"Something went wrong: \"{error}\"")
             return -1
-        print(f"Result: \"{text}"\") 
+        print(f"Result: \"{text}\"") 
         
         print("Requesting Discord API...")
         try:

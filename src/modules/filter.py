@@ -1,9 +1,9 @@
 import os
-from filter_modules import clean_text, mask_word
+from .filter_modules import clean_text, mask_word
 
 def filter(text, language):
     base_dir = os.path.dirname(__file__)
-    wordlist_path = os.path.join(base_dir, 'wordlists_slur', f'wordlist_{language}.txt')
+    wordlist_path = os.path.join(base_dir, 'wordlists_slurs', f'wordlist_{language}.txt')
 
     with open(wordlist_path, 'r', encoding='utf-8') as f:
         banned_words = [line.strip().lower() for line in f if line.strip()]

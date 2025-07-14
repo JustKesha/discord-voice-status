@@ -1,3 +1,5 @@
+import unicodedata
+
 def clean_text(text):
     text = unicodedata.normalize('NFKC', text)
     replacements = {
