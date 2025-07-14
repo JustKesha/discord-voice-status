@@ -1,12 +1,12 @@
 # Discord Custom Status
 status:
+  language: "en" # FIXME Uncomplete feature, look into #11 on github
   update_interval: 10.0 # Seconds (Do not set below 4 seconds, 10-30 recommended)
 
 # Environment Variables
 # (If not specified here, will try to load from a .env file in the same directory)
 env:
   DISCORD_TOKEN: ""
-  LANGUAGE: "en" # this feature is not yet fully completed, leave it as it is
 
 # Discord API
 api:

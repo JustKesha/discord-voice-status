@@ -9,8 +9,6 @@ def main() -> int:
     try:
         config = utils.load_config()
         status = config["status"]
-        language = config.get("env", {}).get("LANGUAGE", "en")
-        print(f"Language from config: {language}")
     except FileNotFoundError:
         print(f"Couldnt find the \"{utils.config.Default.YAML}\" file at \"{utils.config.Default.ROOT}\"")
         return -1
@@ -25,7 +23,6 @@ def main() -> int:
 
 def loop(config: dict) -> int:
     status: dict = config["status"]
-    language: dict = config["env"]["LANGUAGE"]
 
     while True:
         print("Recording...")
@@ -47,7 +44,7 @@ def loop(config: dict) -> int:
         
         print("Running filter...")
         try:
-            text = modules.filter(text, language)
+            text = modules.filter(text, status["language"])
         except Exception as error:  
             print(f"Something went wrong: \"{error}\"")
             return -1
