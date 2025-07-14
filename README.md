@@ -26,10 +26,10 @@ While this uses the same technology as clients like Vencord or BetterDiscord whi
 `git clone https://github.com/JustKesha/discord-voice-status.git`<br>
 `cd discord-voice-status`
 
-4. Install the required dependencies:<br>
+2. Install the required dependencies:<br>
 `pip install -r requirements.txt`
 
-6. Set up your configuration (see [Configuration section](#configuration) below)
+3. Set up your configuration (see [Configuration section](#configuration) below)
 
 ## Configuration
 
@@ -74,12 +74,12 @@ The bot will:
 1. Start listening to your microphone
 2. Once set time is out, run speech recognition
 3. Request Discord's API to set your custom status with resulting message
-4. Repeat unitl program terminated
+4. Repeat until program terminated
 
 ### Troubleshooting
 
 - Make sure you're using Python 3.10.11 or higher
-- Verify your configuration and Discord token are correct
+- Verify that your configuration and Discord token are correct
 - Check your microphone permissions
 - Ensure no other applications are using your microphone
 - If status updates stop working, restart the bot
