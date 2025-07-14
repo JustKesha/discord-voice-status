@@ -41,7 +41,15 @@ def loop(config: dict) -> int:
         except Exception as error:
             print(f"Something went wrong: \"{error}\"")
             return -1
-        print(f"Result: \"{text}\"")
+        print(f"Raw result: \"{text}\"")
+        
+        print("Running filter...")
+        try:
+            text = filter(text)
+        except Exception as error:  
+            print(f"Something went wrong: \"{error}\"")
+            return -1
+        print(f"Result: \"{text}"\") 
         
         print("Requesting Discord API...")
         try:
