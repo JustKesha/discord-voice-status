@@ -20,6 +20,8 @@ A Python script that updates your Discord custom status in real-time with your v
 
 While this uses the same technology as clients like Vencord or BetterDiscord which have remained undetected, Discord technically prohibits automated status updates. Use at your own risk.
 
+> [!NOTE]
+> We are using a message filter to make sure no bad words accidentally slip into your discord status.
 ## Installation
 
 1. Clone this repository:<br>
