@@ -1,6 +1,6 @@
 # Discord Voice Status Updater
 
-A Python script that updates your Discord custom status in real-time with your voice input using speech recognition.
+Python script that updates your Discord custom status in real-time with your voice input using speech recognition to display what you're talking about.
 
 ### Features
 
@@ -93,6 +93,7 @@ Want to help develop this project? Check out the [Issues tab](../../issues)!
 Please follow these guidelines when contributing:
 - Keep code style consistent
 - Update documentation if needed
+- Add any important values to config
 - Test your changes thoroughly
 
 ## Other
