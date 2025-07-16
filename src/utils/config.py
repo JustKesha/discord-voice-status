@@ -13,8 +13,6 @@ class Default:
     ENVS_PREFIX = "PY_TDS_"
     ENVS_SECTION = "env"
     ENVS_REMOVE_PREFIX = True
-    LANGUAGE = "en-US"
-    LANGUAGE_CONFIG_PATH = ["status", "language"]
 
 def load_yaml(
         name: str = Default.ROOT,
@@ -48,15 +46,6 @@ def merge_envs_to_config(
         return config
     else:
         return {**config, **env_config}
-    
-def get_language(config: Dict[str, Any]) -> str:
-    try:
-        current = config
-        for key in Default.LANGUAGE_CONFIG_PATH:
-            current = current[key]
-        return str(current)
-    except (KeyError, TypeError):
-        return Default.LANGUAGE
 
 def load_config(
         yaml_file: str = Default.YAML,
@@ -72,13 +61,7 @@ def load_config(
         )
     return config
 
-def get_config() -> Dict[str, Any]:
-    if config is None:
-        load_config()
-    return config
-
-def get_language_config() -> str:
-    return get_language(get_config())
+def get_config() -> Dict[str, Any]: return config
 
 if __name__ == "__main__":
     load_config()
