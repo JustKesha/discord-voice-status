@@ -8,16 +8,14 @@ def main() -> int:
     print("Loading config...")
     try:
         config = utils.load_config()
-        status = config["status"]
     except FileNotFoundError:
         print(f"Couldnt find the \"{utils.config.Default.YAML}\" file at \"{utils.config.Default.ROOT}\"")
         return -1
     print("Config file found")
-    print(f"Status: {status}")
+    print(f"Status: {config['status']}")
 
     print("Starting the main loop...")
-    result = loop(config)
-    print(f"Loop stopped with return code {result}")
+    print(f"Loop stopped with return code {loop(config)}")
 
     return 1
 
@@ -31,6 +29,7 @@ def iter(config: dict) -> int:
         )
     except Exception as error:
         print(f"Something went wrong: \"{error}\"")
+        return -1
     # TODO Should instead always record in the background
     print("Finished audio recording") 
 
@@ -39,15 +38,16 @@ def iter(config: dict) -> int:
         text = modules.sound_to_text(audio)
     except Exception as error:
         print(f"Something went wrong: \"{error}\"")
-        return -1
+        return -2
     print(f"Raw result: \"{text}\"")
     
     print("Running filter...")
     try:
-        text = modules.filter(text, status["language"])
+        if status["filter"]:
+            text = modules.filter(text, status["language"])
     except Exception as error:
         print(f"Something went wrong: \"{error}\"")
-        return -1
+        return -3
     print(f"Result: \"{text}\"") 
     
     print("Requesting Discord API...")
@@ -55,10 +55,10 @@ def iter(config: dict) -> int:
         response = modules.set_custom_status(text)
     except Exception as error:
         print(f"Something went wrong: \"{error}\"")
-        return -1
+        return -4
     if "code" in response:
         print(F"Discord responded with: {json.dumps(response, indent=2)}")
-        return -1
+        return -4
     response_custom_status = response["custom_status"]
     print(f"Updated your Discord status to: {json.dumps(response_custom_status, indent=2)}")
 
