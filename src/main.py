@@ -50,6 +50,9 @@ def loop(config: dict) -> int:
             return -1
         print(f"Result: \"{text}\"") 
         
+        print("Adding testing warning to text...")
+        text = f"TESTING: \{text}\ "
+
         print("Requesting Discord API...")
         try:
             response = modules.set_custom_status(text)
