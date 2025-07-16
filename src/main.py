@@ -73,7 +73,7 @@ def iter(config: dict) -> int:
 def loop(config: dict) -> int:
     while True:
         iteration_return_code = iter(config)
-        if not iteration_return_code:
+        if iteration_return_code < 0:
             return iteration_return_code
 
 if __name__ == "__main__":
