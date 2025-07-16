@@ -21,49 +21,54 @@ def main() -> int:
 
     return 1
 
-def loop(config: dict) -> int:
+def iter(config: dict) -> int:
     status: dict = config["status"]
+    
+    print("Recording...")
+    try:
+        audio = modules.record_audio(
+            duration_sec = status["update_interval"]
+        )
+    except Exception as error:
+        print(f"Something went wrong: \"{error}\"")
+    # TODO Should instead always record in the background
+    print("Finished audio recording") 
 
-    while True:
-        print("Recording...")
-        try:
-            audio = modules.record_audio(
-                duration_sec = status["update_interval"]
-            )
-        except Exception as error:
-            print(f"Something went wrong: \"{error}\"")
-        # TODO Should instead always record in the background
-        print("Finished audio recording") 
-
-        print("Running speech recognision...")
-        try:
-            text = modules.sound_to_text(audio)
-        except Exception as error:
-            print(f"Something went wrong: \"{error}\"")
-            return -1
-        print(f"Raw result: \"{text}\"")
-        
-        print("Running filter...")
-        try:
-            text = modules.filter(text, status["language"])
-        except Exception as error:
-            print(f"Something went wrong: \"{error}\"")
-            return -1
-        print(f"Result: \"{text}\"") 
-        
-        print("Requesting Discord API...")
-        try:
-            response = modules.set_custom_status(text)
-        except Exception as error:
-            print(f"Something went wrong: \"{error}\"")
-            return -1
-        if "code" in response:
-            print(F"Discord responded with: {json.dumps(response, indent=2)}")
-            return -1
-        response_custom_status = response["custom_status"]
-        print(f"Updated your Discord status to: {json.dumps(response_custom_status, indent=2)}")
+    print("Running speech recognision...")
+    try:
+        text = modules.sound_to_text(audio)
+    except Exception as error:
+        print(f"Something went wrong: \"{error}\"")
+        return -1
+    print(f"Raw result: \"{text}\"")
+    
+    print("Running filter...")
+    try:
+        text = modules.filter(text, status["language"])
+    except Exception as error:
+        print(f"Something went wrong: \"{error}\"")
+        return -1
+    print(f"Result: \"{text}\"") 
+    
+    print("Requesting Discord API...")
+    try:
+        response = modules.set_custom_status(text)
+    except Exception as error:
+        print(f"Something went wrong: \"{error}\"")
+        return -1
+    if "code" in response:
+        print(F"Discord responded with: {json.dumps(response, indent=2)}")
+        return -1
+    response_custom_status = response["custom_status"]
+    print(f"Updated your Discord status to: {json.dumps(response_custom_status, indent=2)}")
 
     return 1
+
+def loop(config: dict) -> int:
+    while True:
+        iteration_return_code = iter(config)
+        if not iteration_return_code:
+            return iteration_return_code
 
 if __name__ == "__main__":
     print(f"Main returned {main()}")
