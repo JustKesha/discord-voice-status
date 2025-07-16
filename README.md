@@ -1,6 +1,6 @@
 # Discord Voice Status Updater
 
-A Python script that updates your Discord custom status in real-time with your voice input using speech recognition.
+Python script that updates your Discord custom status in real-time with your voice input using speech recognition to display what you're talking about.
 
 ### Features
 
@@ -20,16 +20,18 @@ A Python script that updates your Discord custom status in real-time with your v
 
 While this uses the same technology as clients like Vencord or BetterDiscord which have remained undetected, Discord technically prohibits automated status updates. Use at your own risk.
 
+> [!NOTE]
+> We are using a message filter to make sure no bad words accidentally slip into your discord status.
 ## Installation
 
 1. Clone this repository:<br>
 `git clone https://github.com/JustKesha/discord-voice-status.git`<br>
 `cd discord-voice-status`
 
-4. Install the required dependencies:<br>
+2. Install the required dependencies:<br>
 `pip install -r requirements.txt`
 
-6. Set up your configuration (see [Configuration section](#configuration) below)
+3. Set up your configuration (see [Configuration section](#configuration) below)
 
 ## Configuration
 
@@ -54,7 +56,7 @@ env:
 
 Create a .env file in the root directory with your token:
 ```env
-PY_TDS_DISCORD_TOKEN=your_token_here
+PY_DVS_DISCORD_TOKEN=your_token_here
 ```
 
 ### Getting Your Discord Token
@@ -74,12 +76,12 @@ The bot will:
 1. Start listening to your microphone
 2. Once set time is out, run speech recognition
 3. Request Discord's API to set your custom status with resulting message
-4. Repeat unitl program terminated
+4. Repeat until program terminated
 
 ### Troubleshooting
 
 - Make sure you're using Python 3.10.11 or higher
-- Verify your configuration and Discord token are correct
+- Verify that your configuration and Discord token are correct
 - Check your microphone permissions
 - Ensure no other applications are using your microphone
 - If status updates stop working, restart the bot
@@ -91,6 +93,7 @@ Want to help develop this project? Check out the [Issues tab](../../issues)!
 Please follow these guidelines when contributing:
 - Keep code style consistent
 - Update documentation if needed
+- Add any important values to config
 - Test your changes thoroughly
 
 ## Other

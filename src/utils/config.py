@@ -10,7 +10,7 @@ class Default:
     ROOT = Path(__file__).parent.parent.parent
     YAML = "config.yaml"
     ENVS = ".env"
-    ENVS_PREFIX = "PY_TDS_"
+    ENVS_PREFIX = "PY_DVS_"
     ENVS_SECTION = "env"
     ENVS_REMOVE_PREFIX = True
 

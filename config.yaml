@@ -1,5 +1,6 @@
 # Discord Custom Status
 status:
+  language: "en" # FIXME Uncomplete feature, look into #11 on github
   update_interval: 10.0 # Seconds (Do not set below 4 seconds, 10-30 recommended)
 
 # Environment Variables
