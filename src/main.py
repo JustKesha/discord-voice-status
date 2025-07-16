@@ -34,6 +34,7 @@ def loop(config: dict) -> int:
             print(f"Something went wrong: \"{error}\"")
         # TODO Should instead always record in the background
         print("Finished audio recording") 
+
         print("Running speech recognision...")
         try:
             text = modules.sound_to_text(audio)
@@ -45,7 +46,7 @@ def loop(config: dict) -> int:
         print("Running filter...")
         try:
             text = modules.filter(text, status["language"])
-        except Exception as error:  
+        except Exception as error:
             print(f"Something went wrong: \"{error}\"")
             return -1
         print(f"Result: \"{text}\"") 
