@@ -9,6 +9,7 @@ recording:
   device_index: NULL # Set to null to use default mic
 
 # Environment Variables
+# ******************** DO NOT TOUCH UNLESS YOURE A DEVELOPER *********************
 # (If not specified here, will try to load from a .env file in the same directory)
 env:
   DISCORD_TOKEN: ""
