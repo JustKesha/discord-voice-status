@@ -1,23 +1,56 @@
-import os
-from utils import clean_text, mask_word
+from pathlib import Path
+from typing import Callable, Union
+from utils import mask_word
 
-def filter(text, language):
-    base_dir = os.path.dirname(__file__)
-    wordlist_path = os.path.join(base_dir, 'wordlists_slurs', f'wordlist_{language}.txt')
+class Default:
+    LANGUAGE: str = "en"
+    CENSOR_METHOD: Callable[[str], str] = mask_word
+    FILTER_LISTS_PATH: Path = Path(__file__).parent / "filter_lists"
+    FILTER_LIST_PREFIX: str = "wordlist_"
+    FILTER_LIST_FORMAT: str = ".txt"
+    FILTER_LIST_ENCODING: str = "utf-8"
 
-    with open(wordlist_path, 'r', encoding='utf-8') as f:
-        banned_words = [line.strip().lower() for line in f if line.strip()]
+def get_filter_list_path(
+        language: str = Default.LANGUAGE,
+        directory: Path = Default.FILTER_LISTS_PATH,
+        prefix: str = Default.FILTER_LIST_PREFIX,
+        format: str = Default.FILTER_LIST_FORMAT
+        ) -> Path:
+    return directory / f"{prefix}{language}{format}"
 
-    text_clean = clean_text(text)
-    lowered = text_clean.lower()
+def clean_filter_line(line: str) -> Union[str, None]:
+    clean = line.strip().lower()
+    return clean or None
 
-    masked_text = text_clean
+def load_filter_words(
+        language: str = Default.LANGUAGE,
+        encoding: str = Default.FILTER_LIST_ENCODING,
+        **kwargs
+        ) -> set[str]:
+    text = get_filter_list_path(language, **kwargs).read_text(encoding)
+    words = {
+        word
+        for line in text.split('\n')
+        if (word := clean_filter_line(line))
+        }
+    return words
 
-    for word in banned_words:
-        if word in lowered:
-            censored = mask_word(word)
-            masked_text = masked_text.replace(word, censored)
-            masked_text = masked_text.replace(word.capitalize(), censored)
-            masked_text = masked_text.replace(word.upper(), censored)
+def apply_filter(
+        text: str,
+        filter_words: set[str],
+        censor_method: Callable[[str], str] = Default.CENSOR_METHOD
+        ) -> str:
+    for word in filter_words:
+        if word in text:
+            text = text.replace(word, censor_method(word))
+    return text
 
-    return masked_text
+def filter(
+        text: str,
+        language: str = Default.LANGUAGE,
+        censor_method: Callable = Default.CENSOR_METHOD,
+        **kwargs
+        ) -> str:
+    words = load_filter_words(language, **kwargs)
+    text = apply_filter(text, words, censor_method)
+    return text
