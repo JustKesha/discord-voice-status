@@ -1,7 +1,7 @@
 # Discord Custom Status
 status:
-  language: "ru-RU" # FIXME Uncomplete feature, look into #11 on github
-  filter: off
+  language: "en-US"
+  filter: on
   update_interval: 10.0 # Seconds (Do not set below 4 seconds, 10-30 recommended)
 
 # Environment Variables
