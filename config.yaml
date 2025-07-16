@@ -6,7 +6,7 @@ status:
 # Environment Variables
 # (If not specified here, will try to load from a .env file in the same directory)
 env:
-  DISCORD_TOKEN: ""
+  DISCORD_TOKEN: "git@github.com:JustLucasHere/discord-voice-status-fork.git"
 
 # Discord API
 api:
