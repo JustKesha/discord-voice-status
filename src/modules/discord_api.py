@@ -10,8 +10,8 @@ class CustomStatus(Enum):
     INVISIBLE = "invisible"
 
 class Default:
-    STATUS = CustomStatus.ONLINE
-    EMOJI = ""
+    STATUS: CustomStatus = CustomStatus.ONLINE
+    EMOJI: str = ""
 
 _last_api_call_time = 0
 _payload_rate_limit = 0 # Max 1 call per <- seconds

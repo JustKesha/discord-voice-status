@@ -1,7 +1,7 @@
 import speech_recognition as sr
 
 class Default:
-    ON_STT_ERROR = ""
+    ON_STT_ERROR: str = ""
 
 def sound_to_text(
         audio_data: sr.AudioData,

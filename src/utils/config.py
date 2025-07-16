@@ -7,12 +7,12 @@ from dotenv import load_dotenv
 config: Union[Dict[str, Any], None] = None
 
 class Default:
-    ROOT = Path(__file__).parent.parent.parent
-    YAML = "config.yaml"
-    ENVS = ".env"
-    ENVS_PREFIX = "PY_DVS_"
-    ENVS_SECTION = "env"
-    ENVS_REMOVE_PREFIX = True
+    ROOT: Path = Path(__file__).parent.parent.parent
+    YAML: str = "config.yaml"
+    ENVS: str = ".env"
+    ENVS_PREFIX: str = "PY_DVS_"
+    ENVS_SECTION: str = "env"
+    ENVS_REMOVE_PREFIX: bool = True
 
 def load_yaml(
         name: str = Default.ROOT,
