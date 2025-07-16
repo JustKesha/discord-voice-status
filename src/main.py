@@ -58,15 +58,20 @@ def loop(config: dict) -> int:
             print(f"Something went wrong: \"{error}\"")
             return -1
         
-        print("Requesting Discord API...")
-        try:
-            response = modules.set_custom_status(text)
-        except Exception as error:
-            print(f"Something went wrong: \"{error}\"")
-            return -1
-        if "code" in response:
-            print(F"Discord responded with: {json.dumps(response, indent=2)}")
-            return -1
+        print("Checking if text is empty...")
+        if not text:
+            print("Text is empty, skipping update")
+            continue
+        else:
+            print("Requesting Discord API...")
+            try:
+                response = modules.set_custom_status(text)
+            except Exception as error:
+                print(f"Something went wrong: \"{error}\"")
+                return -1
+            if "code" in response:
+                print(F"Discord responded with: {json.dumps(response, indent=2)}")
+                return -1
         response_custom_status = response["custom_status"]
         print(f"Updated your Discord status to: {json.dumps(response_custom_status, indent=2)}")
 
