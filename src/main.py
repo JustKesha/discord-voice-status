@@ -4,6 +4,7 @@ import utils
 
 def main() -> int:
     print("Starting...")
+    dumps_indent = 2
 
     print("Loading config...")
     try:
@@ -11,8 +12,11 @@ def main() -> int:
     except FileNotFoundError:
         print(f"Couldnt find the \"{utils.config.Default.YAML}\" file at \"{utils.config.Default.ROOT}\"")
         return -1
-    print("Config file found")
-    print(f"Status: {config['status']}")
+    print(f"Status: {json.dumps(config['status'], indent=dumps_indent)}")
+
+    print("Initializing Discord API...")
+    modules.init_discord_api()
+    print(f"Api: {json.dumps(config['api'], indent=dumps_indent)}")
 
     print("Starting the main loop...")
     print(f"Loop stopped with return code {loop(config)}")

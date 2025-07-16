@@ -13,23 +13,33 @@ class Default:
     STATUS: CustomStatus = CustomStatus.ONLINE
     EMOJI: str = ""
 
+_module_init_called = False
 _last_api_call_time = 0
 _payload_rate_limit = 0 # Max 1 call per <- seconds
 
-def can_send_payload() -> bool:
-    global _last_api_call_time, _payload_rate_limit
-    config = get_config()
+def init(config: dict | None = None) -> None:
+    global _payload_rate_limit, _module_init_called
+
+    if _module_init_called:
+        return
+
+    if not config:
+        config = get_config()
+
     api = config["api"]
-    # TODO Add init() method to update _payload_rate_limit
-    # instead of having it update each payload send
+
     _payload_rate_limit = api["limits"]["presence_update_rate_limit"]
+    _module_init_called = True
+
+def can_send_payload() -> bool:
+    global _last_api_call_time
 
     current_time = time.time()
     time_since_last_call = current_time - _last_api_call_time
 
     if time_since_last_call < _payload_rate_limit:
         return False
-    
+
     _last_api_call_time = current_time
     return True
 
@@ -55,9 +65,12 @@ def send_payload(payload: dict) -> dict:
 def set_custom_status(
         message: str,
         emoji: str = Default.EMOJI,
-        status: CustomStatus = Default.STATUS
+        status: CustomStatus = Default.STATUS,
+        config: dict | None = None
         ) -> dict:
-    config = get_config()
+    if not config:
+        config = get_config()
+
     limits = config["api"]["limits"]
     message = message[:limits["max_custom_status_length"]]
     return send_payload({
@@ -67,3 +80,6 @@ def set_custom_status(
         },
         "status": status.value
     })
+
+if __name__ == "__main__":
+    init()
