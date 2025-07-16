@@ -1,5 +1,5 @@
 import os
-from .filter_modules import clean_text, mask_word
+from utils import clean_text, mask_word
 
 def filter(text, language):
     base_dir = os.path.dirname(__file__)
