@@ -4,6 +4,10 @@ status:
   filter: on
   update_interval: 10.0 # Seconds (Do not set below 4 seconds, 10-30 recommended)
 
+# Input Settings
+recording:
+  device_index: NULL # Set to null to use default mic
+
 # Environment Variables
 # (If not specified here, will try to load from a .env file in the same directory)
 env:

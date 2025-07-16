@@ -25,11 +25,13 @@ def main() -> int:
 
 def iter(config: dict) -> int:
     status: dict = config["status"]
+    record: dict = config["recording"]
     
     print("Recording...")
     try:
         audio = modules.record_audio(
-            duration_sec = status["update_interval"]
+            duration_sec = status["update_interval"],
+            source = modules.sr.Microphone(record["device_index"])
         )
     except Exception as error:
         print(f"Something went wrong: \"{error}\"")
@@ -52,7 +54,7 @@ def iter(config: dict) -> int:
     except Exception as error:
         print(f"Something went wrong: \"{error}\"")
         return -3
-    print(f"Result: \"{text}\"") 
+    print(f"Result: \"{text}\"")
     
     print("Requesting Discord API...")
     try:
@@ -75,4 +77,4 @@ def loop(config: dict) -> int:
             return iteration_return_code
 
 if __name__ == "__main__":
-    print(f"Main returned {main()}")
+    main()
