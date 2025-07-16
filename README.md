@@ -65,7 +65,8 @@ Follow any of these guides to get your Discord token:
 https://www.youtube.com/results?search_query=how+to+get+discord+token
 
 > [!WARNING]
-> Never share your token with anyone!
+> Never share your token and / or `.env` file with anyone!<br>
+> If you're planning to contribute to this project and / or share the files you download, make sure you put your token in `.env` file and not [config.yaml](config.yaml), and do not share your `.env` file with anyone, even your friends.
 
 ## Usage
 
