@@ -28,7 +28,8 @@ def loop(config: dict) -> int:
         print("Recording...")
         try:
             audio = modules.record_audio(
-                duration_sec = status["update_interval"]
+            duration_sec = status["update_interval"],
+            source = modules.speech_recognision.sr.Microphone(None)
             )
         except Exception as error:
             print(f"Something went wrong: \"{error}\"")
@@ -49,6 +50,18 @@ def loop(config: dict) -> int:
             print(f"Something went wrong: \"{error}\"")
             return -1
         print(f"Result: \"{text}\"") 
+        
+        print("Checking if text is empty...")
+        if not text:
+            print("Text is empty, skipping...")
+            continue
+            
+        print("Adding test warning to text...")
+        try:
+            text = f"TESTING: \"{text}\""
+        except Exception as error:
+            print(f"Something went wrong: \"{error}\"")
+            return -1
         
         print("Requesting Discord API...")
         try:
