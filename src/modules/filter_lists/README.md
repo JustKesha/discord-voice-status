@@ -2,7 +2,7 @@
 
 ## Purpose of This Folder
 
-This folder contains comprehensive lists of offensive, derogatory, and inappropriate words/phrases across multiple languages. These lists are used **exclusively** for automated content filtering in our Discord status update application.
+This folder contains comprehensive lists of offensive, derogatory, and inappropriate words/phrases across multiple languages. These lists are used **exclusively** for [automated content filtering](../message_filter.py) in our Discord status update application.
 
 ## How We Use These Lists
 
