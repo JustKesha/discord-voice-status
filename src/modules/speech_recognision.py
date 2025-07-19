@@ -1,7 +1,7 @@
 import speech_recognition as sr
 
 class Default:
-    LANGUAGE = "en-US"
+    LANGUAGE = "en"
     ON_STT_ERROR: str = ""
 
 def sound_to_text(
