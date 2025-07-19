@@ -1,15 +1,17 @@
 import speech_recognition as sr
 
 class Default:
+    LANGUAGE = "en"
     ON_STT_ERROR: str = ""
 
 def sound_to_text(
         audio_data: sr.AudioData,
+        language: str = Default.LANGUAGE,
         method: sr.Recognizer = sr.Recognizer().recognize_google,
         on_error: str = Default.ON_STT_ERROR
     ) -> str:
     try:
-        return method(audio_data)
+        return method(audio_data, language = language)
     except:
         return on_error
 

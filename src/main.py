@@ -41,7 +41,7 @@ def iter(config: dict) -> int:
 
     print("Running speech recognision...")
     try:
-        text = modules.sound_to_text(audio)
+        text = modules.sound_to_text(audio, language = status["language"])
     except Exception as error:
         print(f"Something went wrong: \"{error}\"")
         return -2
