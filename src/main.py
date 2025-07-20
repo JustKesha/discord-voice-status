@@ -50,7 +50,7 @@ def iter(config: dict) -> int:
     print("Running filter...")
     try:
         if status["filter"]:
-            text = modules.filter(text, status["language"])
+            text = modules.filter(text, status["language"], censor_mode=status["censor_mode"])
     except Exception as error:
         print(f"Something went wrong: \"{error}\"")
         return -3
