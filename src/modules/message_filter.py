@@ -1,10 +1,11 @@
 from pathlib import Path
 from typing import Callable, Union
-from utils import mask_word
+from utils import mask_word, CensorMode
 
 class Default:
     LANGUAGE: str = "en"
-    CENSOR_METHOD: Callable[[str], str] = mask_word
+    CENSOR_MODE: CensorMode = "first_last"
+    CENSOR_METHOD: Callable[[str], str] = lambda word: mask_word(word, Default.CENSOR_MODE)
     FILTER_LISTS_PATH: Path = Path(__file__).parent / "filter_lists"
     FILTER_LIST_PREFIX: str = "wordlist_"
     FILTER_LIST_FORMAT: str = ".txt"
@@ -48,9 +49,10 @@ def apply_filter(
 def filter(
         text: str,
         language: str = Default.LANGUAGE,
-        censor_method: Callable = Default.CENSOR_METHOD,
+        censor_mode: CensorMode = Default.CENSOR_MODE,
         **kwargs
         ) -> str:
+    current_censor = lambda word: mask_word(word, censor_mode)
     words = load_filter_words(language, **kwargs)
-    text = apply_filter(text, words, censor_method)
+    text = apply_filter(text, words, current_censor)
     return text
