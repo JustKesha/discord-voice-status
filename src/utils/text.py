@@ -2,11 +2,11 @@ from typing import Literal
 
 CensorMode = Literal["full", "first_last", "first_visible"]
 
-def mask_word(word: str, mode: str = "first_last") -> str:
+def censor_word(word: str, mode: str = "first_last") -> str:
     match mode:
         case "full":
             return "*" * len(word)
-        case "first_last":
+        case "first_last_visible":
             if len(word) <= 2:
                 return "*" * len(word)
             return word[0] + "*" * (len(word) - 2) + word[-1]
