@@ -58,7 +58,7 @@ def iter(config: dict) -> int:
     
     print("Requesting Discord API...")
     try:
-        response = modules.set_custom_status(text)
+        response = modules.set_custom_status(text, status["emoji"])
     except Exception as error:
         print(f"Something went wrong: \"{error}\"")
         return -4
