@@ -68,6 +68,16 @@ recording:
   device_index: NULL # Set to null to use default mic, otherwise 0-N
 ```
 
+#### Config Parameters
+
+| Parameter | Description | Accepted Values | Example |
+|-|-|-|-|
+| language | Language to use for speech recognition & filter | ISO 639 language code | `"en"` |
+| filter | Whether or not to use naughty words filter,<br>Currently supports the following languages: `"en"`, `"ru"` | Boolean: `on`/`off` | `on` |
+| censor_mode | Censoring mode to use for filter | `"full"`, `"first_last_visible"` or `"first_visible"` | `"first_visible"` |
+| update_interval | How long each speech recording will take in seconds | Float: `1.0` - `30.0` | `6.0` |
+| device_index | Preferred microphone's device index (0-N), use `NULL` for default | `0`, `1`, `2` ... or `NULL` | `NULL` |
+
 ## Usage
 
 To start the bot, run from root:
