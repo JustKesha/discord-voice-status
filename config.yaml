@@ -7,11 +7,14 @@ status:
 
 # Input Settings
 recording:
-  device_index: NULL # Set to null to use default mic
+  device_index: NULL # Set to null to use default mic, otherwise 0-N
+
+# ******* WARNING ******************************************************************
+# Please, dont fill the values below unless youre a developer, use .env file instead
+# **********************************************************************************
 
 # Environment Variables
-# ******************** DO NOT TOUCH UNLESS YOURE A DEVELOPER *********************
-# (If not specified here, will try to load from a .env file in the same directory)
+# * If not specified here, will try to load from a .env file in the same directory *
 env:
   DISCORD_TOKEN: ""
 
@@ -24,4 +27,4 @@ api:
   limits:
     max_custom_status_length: 128
     presence_update_rate_limit: 4 # Max 1 update per <- seconds
-
+    
