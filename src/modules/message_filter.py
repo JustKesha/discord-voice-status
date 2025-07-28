@@ -4,7 +4,7 @@ from utils import censor_word, CensorMode
 
 class Default:
     LANGUAGE: str = "en"
-    CENSOR_MODE: CensorMode = "first_last"
+    CENSOR_MODE: CensorMode = "first_last_visible"
     CENSOR_METHOD: Callable[[str], str] = lambda word: censor_word(word, Default.CENSOR_MODE)
     FILTER_LISTS_PATH: Path = Path(__file__).parent / "filter_lists"
     FILTER_LIST_PREFIX: str = "wordlist_"
