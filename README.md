@@ -76,7 +76,13 @@ recording:
 | filter | Whether or not to use naughty words filter,<br>Currently supports the following languages: `"en"`, `"ru"` | Boolean: `on`/`off` | `on` |
 | censor_mode | Censoring mode to use for filter | `"full"`, `"first_last_visible"` or `"first_visible"` | `"first_visible"` |
 | update_interval | How long each speech recording will take in seconds | Float: `1.0` - `30.0` | `6.0` |
-| device_index | Preferred microphone's device index (0-N), use `NULL` for default | `0`, `1`, `2` ... or `NULL` | `NULL` |
+| device_index | Preferred microphone's [device index](#getting-device-index) (0-N), use `NULL` for default | `0`, `1`, `2` ... or `NULL` | `NULL` |
+
+#### Getting Device Index
+
+Device index is a number from 0-N, where N is the total number of connected devices.<br>
+On windows you can get it by simply clicking RMK on your microphone / sound icon on the bottom right, then going to "Sounds" → "Recording" → Find your active microphone.
+Under the name it should controller information with device index at the start of the line, like so: `10- USB PnP Audio Device`, `10` here is the device index.
 
 ## Usage
 
