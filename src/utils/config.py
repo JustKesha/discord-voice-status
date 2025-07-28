@@ -13,12 +13,14 @@ class Default:
     ENVS_PREFIX: str = "PY_DVS_"
     ENVS_SECTION: str = "env"
     ENVS_REMOVE_PREFIX: bool = True
+    ENCODING: str = "utf-8"
 
 def load_yaml(
         name: str = Default.ROOT,
-        path: Path = Default.ROOT
+        path: Path = Default.ROOT,
+        encoding: str = Default.ENCODING
         ) -> Dict[str, Any]:
-    with open(path / name, 'r', encoding='utf-8') as f:
+    with open(path / name, mode="r", encoding=encoding) as f:
         data = yaml.safe_load(f)
     return data
 
