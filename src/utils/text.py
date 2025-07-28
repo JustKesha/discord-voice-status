@@ -1,6 +1,6 @@
 from typing import Literal
 
-CensorMode = Literal["full", "first_last", "first_visible"]
+CensorMode = Literal["full", "first_last_visible", "first_visible"]
 
 def censor_word(word: str, mode: str = "first_last") -> str:
     match mode:
