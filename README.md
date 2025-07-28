@@ -1,30 +1,29 @@
 # Discord Voice Status Updater
 
-Python script that updates your Discord custom status in real-time with your voice input using speech recognition to display what you're talking about.
+Small Python application that updates your Discord custom status in real-time using your voice input & speech recognition to display what you're currently talking about.
 
 ### Features
 
+- Fully configurable
 - Converts your speech to text in real-time
-- Updates your Discord custom status automatically
-- Configurable update interval to respect rate limits
-- Supports both YAML config and .env file for token storage
-- Lightweight with minimal dependencies
+- Updates your Discord status in the background with what you said
 
 ### Requirements
 
-- Python 3.10.11 or higher
 - Discord account
 - Microphone for voice input
+- Python 3.10 or higher
 
 ### Safety
 
 While this uses the same technology as clients like Vencord or BetterDiscord which have remained undetected, Discord technically prohibits automated status updates. Use at your own risk.
 
 > [!NOTE]
-> We are using a message filter to make sure no bad words accidentally slip into your discord status.
+> We are using a message filter to make sure no naughty words accidentally slip into your discord status.
+
 ## Installation
 
-1. Clone this repository:<br>
+1. Clone or install this repository:<br>
 `git clone https://github.com/JustKesha/discord-voice-status.git`<br>
 `cd discord-voice-status`
 
@@ -35,42 +34,43 @@ While this uses the same technology as clients like Vencord or BetterDiscord whi
 
 ## Configuration
 
-There are two ways to configure the bot:
+There are two steps in configuration:
 
-### Method 1: Using config.yaml
+### Step 1:
+
+Create a `.env` file in the root directory with your token:
+```env
+PY_DVS_DISCORD_TOKEN=paste_your_token_here
+```
+
+#### Getting Your Discord Token
+
+Follow any of these guides to get your Discord token:<br>
+https://www.youtube.com/results?search_query=how+to+get+discord+token
+
+> [!WARNING]
+> Never share your token or `.env` file with anyone!
+
+### Step 2:
 
 Edit the config.yaml file with your preferred settings:
 
 ```yaml
 # Discord Custom Status
 status:
+  language: "en"
+  filter: on
+  censor_mode: "first_last_visible" # Can be "full", "first_last_visible" or "first_visible"
   update_interval: 10.0 # Seconds (Do not set below 4 seconds, 10-30 recommended)
 
-# Environment Variables
-# (If not specified here, will try to load from a .env file in the same directory)
-env:
-  DISCORD_TOKEN: "your_token_here"
+# Input Settings
+recording:
+  device_index: NULL # Set to null to use default mic, otherwise 0-N
 ```
-
-### Method 2: Using .env file
-
-Create a .env file in the root directory with your token:
-```env
-PY_DVS_DISCORD_TOKEN=your_token_here
-```
-
-### Getting Your Discord Token
-
-Follow any of these guides to get your Discord token:
-https://www.youtube.com/results?search_query=how+to+get+discord+token
-
-> [!WARNING]
-> Never share your token and / or `.env` file with anyone!<br>
-> If you're planning to contribute to this project and / or share the files you download, make sure you put your token in `.env` file and not [config.yaml](config.yaml), and do not share your `.env` file with anyone, even your friends.
 
 ## Usage
 
-To start the bot, run from the root directory:
+To start the bot, run from root:
 `python src/main.py`
 
 The bot will:
@@ -81,10 +81,9 @@ The bot will:
 
 ### Troubleshooting
 
-- Make sure you're using Python 3.10.11 or higher
+- Make sure you're using Python 3.10 or higher
 - Verify that your configuration and Discord token are correct
-- Check your microphone permissions
-- Ensure no other applications are using your microphone
+- Make sure the application is using the correct device
 - If status updates stop working, restart the bot
 
 ## Contributing
