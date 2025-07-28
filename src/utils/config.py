@@ -18,7 +18,7 @@ def load_yaml(
         name: str = Default.ROOT,
         path: Path = Default.ROOT
         ) -> Dict[str, Any]:
-    with open(path / name) as f:
+    with open(path / name, 'r', encoding='utf-8') as f:
         data = yaml.safe_load(f)
     return data
 
