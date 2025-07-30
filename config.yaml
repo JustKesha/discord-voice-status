@@ -4,7 +4,7 @@ status:
   filter: on
   censor_mode: "first_last_visible" # Can be "full", "first_last_visible" or "first_visible"
   update_interval: 10.0 # Seconds (Do not set below 4 seconds, 10-30 recommended)
-  emoji: "💬"
+  emoji: "💬" # Unicode emoji or custom Discord emoji 
 
 # Input Settings
 recording:
