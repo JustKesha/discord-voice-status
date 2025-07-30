@@ -62,6 +62,7 @@ status:
   filter: on
   censor_mode: "first_last_visible" # Can be "full", "first_last_visible" or "first_visible"
   update_interval: 10.0 # Seconds (Do not set below 4 seconds, 10-30 recommended)
+  emoji: "💬" # Unicode emoji or custom Discord emoji
 
 # Input Settings
 recording:
@@ -77,6 +78,7 @@ recording:
 | censor_mode | Censoring mode to use for filter | `"full"`, `"first_last_visible"` or `"first_visible"` | `"first_visible"` |
 | update_interval | How long each speech recording will take in seconds | Float: `1.0` - `30.0` | `6.0` |
 | device_index | Preferred microphone's [device index](#getting-device-index) (0-N), use `NULL` for default | `0`, `1`, `2` ... or `NULL` | `NULL` |
+| emoji | Emoji to display in status | Unicode symbol or `<:name:id>` (<a:name:id> for animated) | "💬" |
 
 #### Getting Device Index
 
