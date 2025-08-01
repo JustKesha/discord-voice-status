@@ -58,11 +58,11 @@ Edit the config.yaml file with your preferred settings:
 ```yaml
 # Discord Custom Status
 status:
-  language: "en"
-  filter: on
-  censor_mode: "first_last_visible" # Can be "full", "first_last_visible" or "first_visible"
-  update_interval: 10.0 # Seconds (Do not set below 4 seconds, 10-30 recommended)
+  language: "en" # ISO 639 speech recognition language code
   emoji: "💬" # Unicode emoji or custom Discord emoji
+  update_interval: 10.0 # Seconds (Do not set below 4 seconds, 10-30 recommended)
+  filter: on # Naughty words filter (on/off)
+  censor_mode: "first_last_visible" # Can be "full", "first_last_visible" or "first_visible"
 
 # Input Settings
 recording:
@@ -74,11 +74,11 @@ recording:
 | Parameter | Description | Accepted Values | Example |
 |-|-|-|-|
 | language | Language to use for speech recognition & filter | ISO 639 language code | `"en"` |
+| emoji | Emoji to display in status | Unicode symbol or `<:name:id>` (<a:name:id> for animated) | "💬" |
+| update_interval | How long each speech recording will take in seconds | Float: `1.0` - `30.0` | `6.0` |
 | filter | Whether or not to use naughty words filter,<br>Currently supports the following languages: `"en"`, `"ru"` | Boolean: `on`/`off` | `on` |
 | censor_mode | Censoring mode to use for filter | `"full"`, `"first_last_visible"` or `"first_visible"` | `"first_visible"` |
-| update_interval | How long each speech recording will take in seconds | Float: `1.0` - `30.0` | `6.0` |
 | device_index | Preferred microphone's [device index](#getting-device-index) (0-N), use `NULL` for default | `0`, `1`, `2` ... or `NULL` | `NULL` |
-| emoji | Emoji to display in status | Unicode symbol or `<:name:id>` (<a:name:id> for animated) | "💬" |
 
 #### Getting Device Index
 
