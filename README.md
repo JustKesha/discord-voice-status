@@ -74,7 +74,7 @@ recording:
 | Parameter | Description | Accepted Values | Example |
 |-|-|-|-|
 | language | Language to use for speech recognition & filter | ISO 639 language code | `"en"` |
-| emoji | Emoji to display in status | Unicode symbol or `<:name:id>` (<a:name:id> for animated) | "💬" |
+| emoji | Emoji to display in status | Unicode symbol or `<:name:id>` (`<a:name:id>` for animated) | "💬" |
 | update_interval | How long each speech recording will take in seconds | Float: `1.0` - `30.0` | `6.0` |
 | filter | Whether or not to use naughty words filter,<br>Currently supports the following languages: `"en"`, `"ru"` | Boolean: `on`/`off` | `on` |
 | censor_mode | Censoring mode to use for filter | `"full"`, `"first_last_visible"` or `"first_visible"` | `"first_visible"` |
