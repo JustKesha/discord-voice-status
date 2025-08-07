@@ -8,7 +8,7 @@ def main(dumps_indent = None) -> int:
     print("Loading config...")
     try:
         config = utils.load_config()
-        dumps_indent = config["logging"]["dumps_indent"]
+        dumps_indent = config["logging"]["json_indent"]
     except FileNotFoundError:
         filename: str = utils.config.Default.YAML
         filepath: str = utils.config.Default.ROOT
@@ -26,7 +26,7 @@ def main(dumps_indent = None) -> int:
     return 1
 
 def iter(config: utils.Config) -> int:
-    dumps_indent = config["logging"]["dumps_indent"]
+    dumps_indent = config["logging"]["json_indent"]
     status = config["status"]
     record = config["recording"]
 

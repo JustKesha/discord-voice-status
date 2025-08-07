@@ -12,7 +12,7 @@ recording:
 
 # Logging
 logging:
-  dumps_indent: 2 # Can be null or int
+  json_indent: 2 # Can be null or int
 
 # ******* WARNING ******************************************************************
 # Please, dont fill the values below unless youre a developer, use .env file instead

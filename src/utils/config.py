@@ -15,7 +15,7 @@ class ConfigRecording(TypedDict):
     device_index: Optional[int] # Null to use default mic, otherwise 0-N
 
 class ConfigLogging(TypedDict):
-    dumps_indent: Optional[int]
+    json_indent: Optional[int]
 
 class ConfigApiUrl(TypedDict):
     base: str
