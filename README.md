@@ -74,17 +74,24 @@ recording:
 | Parameter | Description | Accepted Values | Example |
 |-|-|-|-|
 | language | Language to use for speech recognition & filter | ISO 639 language code | `"en"` |
-| emoji | Emoji to display in status | Unicode symbol or `<:name:id>` (`<a:name:id>` for animated) | "💬" |
+| emoji | Emoji to display in status | Unicode symbol or `<:name:id>`,<br> use `<a:name:id>` for animated | "📢" |
 | update_interval | How long each speech recording will take in seconds | Float: `1.0` - `30.0` | `6.0` |
-| filter | Whether or not to use naughty words filter,<br>Currently supports the following languages: `"en"`, `"ru"` | Boolean: `on`/`off` | `on` |
+| filter | Whether or not to use naughty words filter,<br>Currently supports the following languages: `"en"`, `"ru"` | Boolean: `on` / `off` | `on` |
 | censor_mode | Censoring mode to use for filter | `"full"`, `"first_last_visible"` or `"first_visible"` | `"first_visible"` |
 | device_index | Preferred microphone's [device index](#getting-device-index) (0-N), use `NULL` for default | `0`, `1`, `2` ... or `NULL` | `NULL` |
+| json_indent | Indentation amout to use for json logging, use `NULL` for none | `0`, `1`, `2` ... or `NULL` | `4` |
 
 #### Getting Device Index
 
-Device index is a number from 0-N, where N is the total number of connected devices.<br>
-On windows you can get it by simply clicking RMK on your microphone / sound icon on the bottom right, then going to "Sounds" → "Recording" → Find your active microphone.
-Under the name it should controller information with device index at the start of the line, like so: `10- USB PnP Audio Device`, `10` here is the device index.
+Device index is a number from 0-N, where N is the total number of devices connected.
+
+##### Windows
+
+1. Rmk on the sound icon (bottom right)
+2. Choose "Sounds", then "Recording"
+3. Find your active microphone
+4. Under the name you will find controller information, like so:<br>
+   `10- USB PnP Audio Device`, where `10` here is the device index
 
 ## Usage
 
