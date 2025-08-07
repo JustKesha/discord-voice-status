@@ -1,13 +1,13 @@
 import time
 import requests
 from enum import Enum
-from utils import get_config
+from utils import get_config, Config
 
 class CustomStatus(Enum):
-    ONLINE = "online"
-    IDLE = "idle"
-    DND = "dnd"
-    INVISIBLE = "invisible"
+    ONLINE: str = "online"
+    IDLE: str  = "idle"
+    DND: str = "dnd"
+    INVISIBLE: str = "invisible"
 
 class Default:
     STATUS: CustomStatus = CustomStatus.ONLINE
@@ -15,9 +15,9 @@ class Default:
 
 _module_init_called = False
 _last_api_call_time = 0
-_payload_rate_limit = 0 # Max 1 call per <- seconds
+_payload_rate_limit = 4 # Seconds
 
-def init(config: dict | None = None) -> None:
+def init(config: Config | None = None) -> None:
     global _payload_rate_limit, _module_init_called
 
     if _module_init_called:
@@ -66,7 +66,7 @@ def set_custom_status(
         message: str,
         emoji: str = Default.EMOJI,
         status: CustomStatus = Default.STATUS,
-        config: dict | None = None
+        config: Config | None = None
         ) -> dict:
     if not config:
         config = get_config()

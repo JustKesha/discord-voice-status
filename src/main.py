@@ -10,23 +10,31 @@ def main() -> int:
     try:
         config = utils.load_config()
     except FileNotFoundError:
-        print(f"Couldnt find the \"{utils.config.Default.YAML}\" file at \"{utils.config.Default.ROOT}\"")
+        filename: str = utils.config.Default.YAML
+        filepath: str = utils.config.Default.ROOT
+        print(f"Couldnt find the \"{filename}\" file at \"{filepath}\"")
         return -1
-    print(f"Status: {json.dumps(config['status'], indent=dumps_indent)}")
+    print(f"Status: {json.dumps(
+        config['status'],
+        indent=dumps_indent
+        )}")
 
     print("Initializing Discord API...")
     modules.init_discord_api()
-    print(f"Api: {json.dumps(config['api'], indent=dumps_indent)}")
+    print(f"Api: {json.dumps(
+        config['api'],
+        indent=dumps_indent
+        )}")
 
     print("Starting the main loop...")
     print(f"Loop stopped with return code {loop(config)}")
 
     return 1
 
-def iter(config: dict) -> int:
-    status: dict = config["status"]
-    record: dict = config["recording"]
-    
+def iter(config: utils.Config) -> int:
+    status = config["status"]
+    record = config["recording"]
+
     print("Recording...")
     try:
         audio = modules.record_audio(
@@ -41,7 +49,10 @@ def iter(config: dict) -> int:
 
     print("Running speech recognision...")
     try:
-        text = modules.sound_to_text(audio, language = status["language"])
+        text = modules.sound_to_text(
+            audio,
+            language = status["language"]
+            )
     except Exception as error:
         print(f"Something went wrong: \"{error}\"")
         return -2
@@ -50,7 +61,11 @@ def iter(config: dict) -> int:
     print("Running filter...")
     try:
         if status["filter"]:
-            text = modules.filter(text, status["language"], censor_mode=status["censor_mode"])
+            text = modules.filter(
+                text,
+                status["language"],
+                censor_mode=status["censor_mode"]
+                )
     except Exception as error:
         print(f"Something went wrong: \"{error}\"")
         return -3
@@ -58,22 +73,31 @@ def iter(config: dict) -> int:
     
     print("Requesting Discord API...")
     try:
-        response = modules.set_custom_status(text, status["emoji"])
+        response = modules.set_custom_status(
+            text,
+            status["emoji"]
+            )
     except Exception as error:
         print(f"Something went wrong: \"{error}\"")
         return -4
     if "code" in response:
-        print(F"Discord responded with: {json.dumps(response, indent=2)}")
+        print(F"Discord responded with: {json.dumps(
+            response,
+            indent=2
+            )}")
         return -4
     response_custom_status = response["custom_status"]
-    print(f"Updated your Discord status to: {json.dumps(response_custom_status, indent=2)}")
+    print(f"Updated your Discord status to: {json.dumps(
+        response_custom_status,
+        indent=2
+        )}")
 
     return 1
 
-def loop(config: dict) -> int:
+def loop(config: utils.Config) -> int:
     while True:
         iteration_return_code = iter(config)
-        if iteration_return_code < 0:
+        if iteration_return_code != 1:
             return iteration_return_code
 
 if __name__ == "__main__":
