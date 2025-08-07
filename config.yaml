@@ -1,7 +1,7 @@
 # Discord Custom Status
 status:
-  language: "en" # ISO 639 speech recognition language code
-  emoji: ":speech_balloon:" # Unicode emoji or custom Discord emoji
+  language: "en" # ISO 639 language code
+  emoji: "💬" # Unicode emoji or custom Discord emoji
   update_interval: 10.0 # Seconds (Do not set below 4 seconds, 10-30 recommended)
   filter: on # Naughty words filter (on/off)
   censor_mode: "first_last_visible" # Can be "full", "first_last_visible" or "first_visible"
@@ -27,4 +27,4 @@ api:
   user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
   limits:
     max_custom_status_length: 128
-    presence_update_rate_limit: 4 # Max 1 update per <- seconds
+    presence_update_rate_limit: 4 # Seconds
