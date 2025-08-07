@@ -13,6 +13,8 @@ class Default:
     STATUS: CustomStatus = CustomStatus.ONLINE
     EMOJI: str = ""
 
+# NOTE When adding functionallity to to this module,
+# TODO Should wrap this module into a class
 _module_init_called = False
 _last_api_call_time = 0
 _payload_rate_limit = 4 # Seconds
@@ -29,7 +31,7 @@ def init(config: Config | None = None) -> None:
     api = config["api"]
 
     _payload_rate_limit = api["limits"]["presence_update_rate_limit"]
-    _module_init_called = True
+    _module_init_called = True # NOTE Beware of the race condition
 
 def can_send_payload() -> bool:
     global _last_api_call_time
@@ -52,6 +54,7 @@ def send_payload(payload: dict) -> dict:
     discord_api_url = api["url"]["base"] + api["url"]["settings"]
     response = requests.patch(
         discord_api_url,
+        # TODO Should move headers & payload structure to config
         headers = {
             "Authorization": config["env"]["DISCORD_TOKEN"],
             "User-Agent": api["user_agent"],
