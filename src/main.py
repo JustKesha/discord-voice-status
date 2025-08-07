@@ -2,29 +2,23 @@ import json
 import modules
 import utils
 
-def main() -> int:
+def main(dumps_indent = None) -> int:
     print("Starting...")
-    dumps_indent = 2
 
     print("Loading config...")
     try:
         config = utils.load_config()
+        dumps_indent = config["logging"]["dumps_indent"]
     except FileNotFoundError:
         filename: str = utils.config.Default.YAML
         filepath: str = utils.config.Default.ROOT
         print(f"Couldnt find the \"{filename}\" file at \"{filepath}\"")
         return -1
-    print(f"Status: {json.dumps(
-        config['status'],
-        indent=dumps_indent
-        )}")
+    print(f"Status: {json.dumps(config['status'], indent=dumps_indent)}")
 
     print("Initializing Discord API...")
     modules.init_discord_api()
-    print(f"Api: {json.dumps(
-        config['api'],
-        indent=dumps_indent
-        )}")
+    print(f"Api: {json.dumps(config['api'], indent=dumps_indent)}")
 
     print("Starting the main loop...")
     print(f"Loop stopped with return code {loop(config)}")
@@ -32,6 +26,7 @@ def main() -> int:
     return 1
 
 def iter(config: utils.Config) -> int:
+    dumps_indent = config["logging"]["dumps_indent"]
     status = config["status"]
     record = config["recording"]
 
@@ -81,16 +76,11 @@ def iter(config: utils.Config) -> int:
         print(f"Something went wrong: \"{error}\"")
         return -4
     if "code" in response:
-        print(F"Discord responded with: {json.dumps(
-            response,
-            indent=2
-            )}")
+        log_response = json.dumps(response, indent=dumps_indent)
+        print(f"Discord responded with: {log_response}")
         return -4
-    response_custom_status = response["custom_status"]
-    print(f"Updated your Discord status to: {json.dumps(
-        response_custom_status,
-        indent=2
-        )}")
+    log_status = json.dumps(response["custom_status"], indent=dumps_indent)
+    print(f"Updated your Discord status to: {log_status}")
 
     return 1
 
