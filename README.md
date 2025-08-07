@@ -53,20 +53,20 @@ https://www.youtube.com/results?search_query=how+to+get+discord+token
 
 ### Step 2:
 
-Edit the config.yaml file with your preferred settings:
+Edit the [config.yaml](config.yaml) file with your preferred settings:
 
 ```yaml
 # Discord Custom Status
 status:
-  language: "en" # ISO 639 speech recognition language code
-  emoji: "💬" # Unicode emoji or custom Discord emoji
-  update_interval: 10.0 # Seconds (Do not set below 4 seconds, 10-30 recommended)
-  filter: on # Naughty words filter (on/off)
-  censor_mode: "first_last_visible" # Can be "full", "first_last_visible" or "first_visible"
+  language: "en"
+  emoji: "💬"
+  update_interval: 10.0
+  filter: on
+  censor_mode: "first_last_visible"
 
 # Input Settings
 recording:
-  device_index: NULL # Set to null to use default mic, otherwise 0-N
+  device_index: NULL
 ```
 
 #### Config Parameters
