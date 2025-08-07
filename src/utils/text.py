@@ -1,5 +1,6 @@
 from typing import Literal
 
+# TODO Perhaps should use a Enum instead (look into config typehints)
 CensorMode = Literal["full", "first_last_visible", "first_visible"]
 
 def censor_word(word: str, mode: str = "first_last") -> str:

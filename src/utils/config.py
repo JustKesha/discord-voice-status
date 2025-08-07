@@ -12,7 +12,10 @@ class ConfigStatus(TypedDict):
     censor_mode: Literal["full", "first_last_visible", "first_visible"]
 
 class ConfigRecording(TypedDict):
-    device_index: Optional[int] # Set to null to use default mic, otherwise 0-N
+    device_index: Optional[int] # Null to use default mic, otherwise 0-N
+
+class ConfigLogging(TypedDict):
+    dumps_indent: Optional[int]
 
 class ConfigApiUrl(TypedDict):
     base: str
@@ -33,6 +36,7 @@ class ConfigEnv(TypedDict):
 class Config(TypedDict):
     status: ConfigStatus
     recording: ConfigRecording
+    logging: ConfigLogging
     env: ConfigEnv
     api: ConfigApi
 

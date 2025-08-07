@@ -10,6 +10,10 @@ status:
 recording:
   device_index: NULL # Set to null to use default mic, otherwise 0-N
 
+# Logging
+logging:
+  dumps_indent: 2 # Can be null or int
+
 # ******* WARNING ******************************************************************
 # Please, dont fill the values below unless youre a developer, use .env file instead
 # **********************************************************************************
