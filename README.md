@@ -67,6 +67,10 @@ status:
 # Input Settings
 recording:
   device_index: NULL
+
+# Logging
+logging:
+  json_indent: 2
 ```
 
 #### Config Parameters
