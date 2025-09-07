@@ -20,6 +20,7 @@ logging:
 
 # Environment Variables
 # * If not specified here, will try to load from a .env file in the same directory *
+# * Note:  Variables in .env file have to start with a "PY_DVS_" prefix by default *
 env:
   DISCORD_TOKEN: ""
 
