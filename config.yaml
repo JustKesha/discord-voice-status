@@ -1,10 +1,10 @@
 # Discord Custom Status
 status:
   language: "en" # ISO 639 language code
-  emoji: "💬" # Unicode emoji or custom Discord emoji
-  update_interval: 10.0 # Seconds (Do not set below 4 seconds, 10-30 recommended)
-  filter: on # Naughty words filter (on/off)
-  censor_mode: "first_last_visible" # Can be "full", "first_last_visible" or "first_visible"
+  emoji: "💬" # Discord or Unicode emoji
+  update_interval: 10.0 # Seconds (Dont set below 4)
+  filter: on # Naughty words filter (On/off)
+  censor_mode: "first_last_visible" # Use "full", "first_last_visible" or "first_visible"
 
 # Input Settings
 recording:
