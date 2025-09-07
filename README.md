@@ -135,6 +135,10 @@ Discord has strict rate limits for status updates:
 
 The bot automatically handles these limits based on your config.
 
+### Documentation
+
+Minimal project documentation can be found inside the [DOCS](DOCS.MD) file.
+
 ### License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
