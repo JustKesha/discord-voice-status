@@ -1,10 +1,10 @@
-# Discord Voice Status Updater
+# Discord Speech Status
 
 Small Python application that updates your Discord custom status in real-time using your voice input & speech recognition to display what you're currently talking about.
 
 ### Features
 
-- Fully configurable
+- Fully configurable → [configuration](#configuration)
 - Converts your speech to text in real-time
 - Updates your Discord status in the background with what you said
 
@@ -30,11 +30,9 @@ While this uses the same technology as clients like Vencord or BetterDiscord whi
 2. Install the required dependencies:<br>
 `pip install -r requirements.txt`
 
-3. Set up your configuration (see [Configuration section](#configuration) below)
+3. Set up your [configuration](#configuration)
 
 ## Configuration
-
-There are two steps in configuration:
 
 ### Step 1:
 
@@ -79,7 +77,7 @@ logging:
 |-|-|-|-|
 | language | Language to use for speech recognition & filter | ISO 639 language code | `"en"` |
 | emoji | Emoji to display in status | Unicode symbol or `<:name:id>`,<br> use `<a:name:id>` for animated | "📢" |
-| update_interval | How long each speech recording will take in seconds | Float: `1.0` - `30.0` | `6.0` |
+| update_interval | How often to update status | Float: `1.0` - `30.0` | `6.0` |
 | filter | Whether or not to use naughty words filter,<br>Currently supports the following languages: `"en"`, `"ru"` | Boolean: `on` / `off` | `on` |
 | censor_mode | Censoring mode to use for filter | `"full"`, `"first_last_visible"` or `"first_visible"` | `"first_visible"` |
 | device_index | Preferred microphone's [device index](#getting-device-index) (0-N), use `NULL` for default | `0`, `1`, `2` ... or `NULL` | `NULL` |
@@ -88,10 +86,11 @@ logging:
 #### Getting Device Index
 
 Device index is a number from 0-N, where N is the total number of devices connected.
+How to find:
 
 ##### Windows
 
-1. Rmk on the sound icon (bottom right)
+1. Right-click on the sound icon in your taskbar
 2. Choose "Sounds", then "Recording"
 3. Find your active microphone
 4. Under the name you will find controller information, like so:<br>
