@@ -137,7 +137,7 @@ The bot automatically handles these limits based on your config.
 
 ### Documentation
 
-Minimal project documentation can be found inside the [DOCS](DOCS.MD) file.
+Minimal project documentation can be found inside the [DOCS](DOCS.md) file.
 
 ### License
 
